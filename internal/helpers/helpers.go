@@ -79,18 +79,18 @@ func EnforceHTTPS(url string) string {
 	return url
 }
 
-// RemoveDomainError checks if provided URL is different
+// IsOurDomain checks if provided URL is different
 // from our own domain name
-func RemoveDomainError(url string) bool {
+func IsOurDomain(url string) bool {
 	if url == os.Getenv("DOMAIN") {
-		return false
+		return true
 	}
 	newURL := strings.Replace(url, "http://", "", 1)
 	newURL = strings.Replace(newURL, "https://", "", 1)
 	newURL = strings.Replace(newURL, "www.", "", 1)
 	newURL = strings.Split(newURL, "/")[0]
 	if newURL != os.Getenv("DOMAIN") {
-		return true
+		return false
 	}
-	return true
+	return false
 }

@@ -25,7 +25,7 @@ func (app *application) shortenURL(c echo.Context) (err error) {
 	}
 
 	// Do not short URLs leading to our domain
-	if !h.RemoveDomainError(body.URL) {
+	if !h.IsOurDomain(body.URL) {
 		return c.JSON(http.StatusBadRequest, &map[string]string{
 			"error": "Can't do that :)",
 		})
