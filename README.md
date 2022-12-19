@@ -1,5 +1,5 @@
 # [Zetahedron](https://l.thisworddoesnotexist.com/Uq7L)
-Simple URL shortener build with [Go](https://go.dev/), [Echo](https://echo.labstack.com/) and [Redis](https://redis.io/)
+Simple URL shortener made with [Go](https://go.dev/), [Echo](https://echo.labstack.com/) and [Redis](https://redis.io/)
 
 ![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
