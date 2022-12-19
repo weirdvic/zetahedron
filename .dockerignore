@@ -1,0 +1,5 @@
+*.md
+Dockerfile
+.gitignore
+.dockerignore
+*.yaml

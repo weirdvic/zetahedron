@@ -25,9 +25,9 @@ type (
 	}
 
 	Response struct {
-		URL    string        `json:"url"`
-		Slug   string        `json:"url_slug"`
-		Expiry time.Duration `json:"expiry"`
+		URL      string        `json:"url"`
+		ShortURL string        `json:"short_url"`
+		Expiry   time.Duration `json:"expiry"`
 	}
 
 	CustomValidator struct {

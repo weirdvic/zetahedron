@@ -25,7 +25,7 @@ func (app *application) shortenURL(c echo.Context) (err error) {
 	}
 
 	// Do not short URLs leading to our domain
-	if !h.IsOurDomain(body.URL) {
+	if h.IsOurDomain(body.URL) {
 		return c.JSON(http.StatusBadRequest, &map[string]string{
 			"error": "Can't do that :)",
 		})
@@ -64,24 +64,24 @@ func (app *application) shortenURL(c echo.Context) (err error) {
 	}
 
 	resp := h.Response{
-		URL:    body.URL,
-		Slug:   "",
-		Expiry: body.Expiry,
+		URL:      body.URL,
+		ShortURL: "",
+		Expiry:   body.Expiry,
 	}
 
-	resp.Slug = os.Getenv("DOMAIN") + "/" + urlKey
+	resp.ShortURL = os.Getenv("DOMAIN") + "/" + urlKey
 	return c.JSON(http.StatusOK, resp)
 }
 
-// app.echo.GET("/:slug", resolveURL)
+// app.echo.GET("/:url", resolveURL)
 func (app *application) resolveURL(c echo.Context) (err error) {
-	slug := c.Param("slug")
+	shortURL := c.Param("url")
 	r := database.CreateClient(0)
 	defer r.Close()
 
-	url, err := r.Get(database.Ctx, slug).Result()
+	url, err := r.Get(database.Ctx, shortURL).Result()
 	if err == redis.Nil {
-		return c.JSON(http.StatusNotFound, &map[string]string{"error": "URL slug not found in DB"})
+		return c.JSON(http.StatusNotFound, &map[string]string{"error": "Short URL not found in DB"})
 	} else if err != nil {
 		return c.JSON(http.StatusInternalServerError, &map[string]string{"error": "Internal server error"})
 	}

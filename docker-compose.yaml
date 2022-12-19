@@ -1,0 +1,14 @@
+services:
+  api-server:
+    build:
+      target: "api-server"
+    image: "zetahedron-api"
+    ports:
+      - "${API_PORT:-1323}:1323"
+    environment:
+      - "DB_ADDR=${DB_ADDR:-redis:6379}"
+      - "DOMAIN=${DOMAIN:-http://localhost:1323}"
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
